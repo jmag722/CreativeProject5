@@ -28,7 +28,7 @@ db.once('open', function() { //Lets us know when we're connected
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+    res.sendFile('events.html', { root: 'public' });
 });
 
 
@@ -46,6 +46,18 @@ router.post('/event', function(req, res, next) {
 });
 
 
+// //GET EVENT BY TITLE
+// router.get('/event', function(req, res, next) {
+//     console.log("GET all events");
+
+//     Event.find(function(err, list) {
+//         if (err) {
+//             console.log("get error");
+//         }
+//         res.json(list);
+//     });
+// });
+
 
 //GET EVENT BY TITLE
 router.get('/eventTitle', function(req, res, next) {
@@ -53,7 +65,8 @@ router.get('/eventTitle', function(req, res, next) {
     console.log(req.query);
     var title = req.query["q"];
     var obj = { Title: title };
-    if (title === "") {
+    console.log(title);
+    if (title === "" || title === undefined) {
         obj = {};
     }
     Event.find(obj, function(err, list) {
@@ -70,7 +83,7 @@ router.get('/eventAddress', function(req, res, next) {
     console.log(req.query);
     var address = req.query["q"];
     var obj = { Address: address };
-    if (address === "") {
+    if (address === "" || address === undefined) {
         obj = {};
     }
     Event.find(obj, function(err, list) {
@@ -87,7 +100,7 @@ router.get('/eventDate', function(req, res, next) {
     console.log(req.query);
     var date = req.query["q"];
     var obj = { Time: date };
-    if (date === "") {
+    if (date === "" || date === undefined) {
         obj = {};
     }
     Event.find(obj, function(err, list) {
@@ -102,7 +115,7 @@ router.delete('/delete', function(req, res, next) {
     console.log("In the DELETE event route");
     var title = req.query["q"];
     var obj = { Title: title };
-    if (title === "") {
+    if (title === "" || title===undefined) {
         console.log("No event to delete?");
         return;
     }

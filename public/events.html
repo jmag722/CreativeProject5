@@ -1,5 +1,31 @@
+<!DOCTYPE html>
 <html>
-    <body>
-        <p>Hello World</p>
-    </body>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <script src="javascripts/events.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+     <meta charset="utf-8">
+</head>
+
+<body>
+    <div ng-app='app' ng-controller='mainCtrl'>
+       
+
+        <form id='inputform' name='eventForm' ng-submit='addNew()'>
+            <input type='text' placeholder='Title' ng-model='title'>
+            <input type='text' placeholder='Address' ng-model='address'>
+            <input type='text' placeholder='Date' ng-model='date'>
+            <input type='text' placeholder='Description' ng-model='descrip'>
+            <button type='submit'>Add Event</button>
+        </form>
+
+        <ul class='User-list'>
+            <li ng-repeat='event in events'>
+            </li>
+        </ul>
+    </div>
+
+</body>
+
 </html>
