@@ -6,3 +6,73 @@ body {
 a {
   color: #00B7FF;
 }
+
+#banner {
+  font-size: 5em;
+  color: #2fc427;
+  background-color: #34008e;
+  width: 75%;
+  border: 30px ridge #853fff;
+  text-align: center;
+  margin: 50px;
+}
+
+.event {
+  display: flex;
+  flex-direction: column;
+  
+  border: 1px black solid;
+}
+
+.dateTime {
+  display: flex;
+  flex-direction: row;
+}
+
+#menu {
+  display: flex;
+  justify-content: center;
+  
+  border: 5px red solid;
+}
+
+#searchBox {
+  display: flex;
+  justify-content: center;
+  
+  border: 5px green solid;
+}
+
+#results {
+  display: flex;
+  /*justify-content: center;*/
+  flex-wrap: wrap;
+  
+  border: 5px blue solid;
+  
+}
+
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.2);
+  z-index: 2;
+  /*cursor: pointer;*/
+}
+
+#addNew {
+  
+}
+
+#inputform {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
