@@ -235,3 +235,177 @@ GET all events
 [0mGET /event [32m200 [0m4.824 ms - 342[0m
 GET all events
 [0mGET /event [36m304 [0m2.366 ms - -[0m
+GET all events
+[0mGET /event [36m304 [0m8.276 ms - -[0m
+GET event by Address
+{ q: '000' }
+[0mGET /eventAddress?q=000 [32m200 [0m2.166 ms - 2[0m
+GET event by Address
+{ q: '000000 Obsidian Way' }
+[0mGET /eventAddress?q=000000%20Obsidian%20Way [32m200 [0m5.496 ms - 342[0m
+[0mGET / [32m200 [0m2.807 ms - 4898[0m
+[0mGET /javascripts/events.js [32m200 [0m2.309 ms - 7190[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.535 ms - 3565[0m
+[0mGET /images/add-picture.jpg [36m304 [0m0.362 ms - -[0m
+[0mGET /%7B%7Bevent.ImageURL%7D%7D [33m404 [0m10.729 ms - 1937[0m
+GET all events
+[0mGET /event [36m304 [0m2.422 ms - -[0m
+[0mGET / [32m200 [0m1.127 ms - 4898[0m
+[0mGET /javascripts/events.js [32m200 [0m0.607 ms - 7190[0m
+[0mGET /stylesheets/style.css [32m200 [0m2.712 ms - 3565[0m
+[0mGET /images/add-picture.jpg [32m200 [0m2.938 ms - 52873[0m
+[0mGET /%7B%7Bevent.ImageURL%7D%7D [33m404 [0m9.434 ms - 1937[0m
+[0mGET /favicon.ico [33m404 [0m5.205 ms - 1937[0m
+[0mGET / [36m304 [0m2.639 ms - -[0m
+[0mGET /javascripts/events.js [36m304 [0m0.356 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.417 ms - -[0m
+[0mGET /images/add-picture.jpg [36m304 [0m0.885 ms - -[0m
+[0mGET /%7B%7Bevent.ImageURL%7D%7D [33m404 [0m14.875 ms - 1937[0m
+GET all events
+[0mGET /event [36m304 [0m3.586 ms - -[0m
+[0mGET / [32m200 [0m0.725 ms - 4898[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.515 ms - 3565[0m
+[0mGET /javascripts/events.js [32m200 [0m0.348 ms - 7190[0m
+[0mGET /images/add-picture.jpg [32m200 [0m1.641 ms - 52873[0m
+[0mGET /%7B%7Bevent.ImageURL%7D%7D [33m404 [0m19.463 ms - 1937[0m
+[0mGET /favicon.ico [33m404 [0m5.748 ms - 1937[0m
+GET event by Title
+{ q: 'undefined' }
+undefined
+Found event(s): 
+[]
+[0mGET /eventTitle?q=undefined [32m200 [0m2.290 ms - 2[0m
+GET all events
+[0mGET /event [32m200 [0m3.186 ms - 342[0m
+[0mGET /%7B%7Bevent.ImageURL%7D%7D [33m404 [0m4.287 ms - 1937[0m
+GET all events
+[0mGET /event [36m304 [0m9.529 ms - -[0m
+GET all events
+[0mGET /event [36m304 [0m2.258 ms - -[0m
+[0mGET / [32m200 [0m0.737 ms - 4898[0m
+[0mGET /javascripts/events.js [32m200 [0m0.624 ms - 7190[0m
+[0mGET /stylesheets/style.css [32m200 [0m1.780 ms - 3565[0m
+[0mGET /images/add-picture.jpg [32m200 [0m0.447 ms - 52873[0m
+[0mGET /%7B%7Bevent.ImageURL%7D%7D [33m404 [0m7.672 ms - 1937[0m
+[0mGET /favicon.ico [33m404 [0m7.017 ms - 1937[0m
+[0mGET / [32m200 [0m1.129 ms - 4898[0m
+[0mGET /javascripts/events.js [32m200 [0m0.678 ms - 7190[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.553 ms - 3565[0m
+[0mGET /images/add-picture.jpg [32m200 [0m0.545 ms - 52873[0m
+[0mGET /%7B%7Bevent.ImageURL%7D%7D [33m404 [0m5.842 ms - 1937[0m
+[0mGET /favicon.ico [33m404 [0m5.061 ms - 1937[0m
+POST new event route
+{ Title: 'Partaay',
+  Description: 'amazing',
+  Address: 'here',
+  MyDate: '2018-10-18',
+  StartTime: '01:01',
+  EndTime: '01:01',
+  ImageURL: 'https://images.pexels.com/photos/196652/pexels-photo-196652.jpeg?cs=srgb&dl=people-lights-festival-196652.jpg&fm=jpg' }
+[0mPOST /event [32m200 [0m3.083 ms - 2[0m
+GET all events
+[0mGET /event [32m200 [0m2.820 ms - 634[0m
+POST new event route
+{ Title: 'Awesome Party',
+  Description: 'its awesome',
+  Address: 'my house',
+  MyDate: '2018-11-16',
+  StartTime: '12:15',
+  EndTime: '00:15',
+  ImageURL: 'https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjEru_s6tneAhWMK3wKHVhrB40QjRx6BAgBEAU&url=http%3A%2F%2Fwww.realdetroitweekly.com%2F8-frugal-ways-throw-3d-inspired-party%2F&psig=AOvVaw29ON-nZL4-ASBoe2I-KHq9&ust=1542489366532690' }
+[0mPOST /event [32m200 [0m2.783 ms - 2[0m
+GET all events
+[0mGET /event [32m200 [0m2.697 ms - 1078[0m
+[0mGET / [36m304 [0m0.559 ms - -[0m
+[0mGET /javascripts/events.js [36m304 [0m0.402 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.229 ms - -[0m
+[0mGET /images/add-picture.jpg [36m304 [0m0.351 ms - -[0m
+[0mGET /%7B%7Bevent.ImageURL%7D%7D [33m404 [0m5.142 ms - 1937[0m
+GET all events
+[0mGET /event [32m200 [0m4.799 ms - 1078[0m
+[0mGET / [32m200 [0m1.497 ms - 4898[0m
+[0mGET /javascripts/events.js [32m200 [0m0.599 ms - 7190[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.499 ms - 3565[0m
+[0mGET /images/add-picture.jpg [32m200 [0m0.547 ms - 52873[0m
+[0mGET /%7B%7Bevent.ImageURL%7D%7D [33m404 [0m4.478 ms - 1937[0m
+[0mGET /favicon.ico [33m404 [0m5.113 ms - 1937[0m
+POST new event route
+{ Title: 'Death',
+  Description: 'I will Die',
+  Address: '1339 E 440 N, Provo, Utah',
+  MyDate: '2993-12-28',
+  StartTime: '00:00',
+  EndTime: '00:00',
+  ImageURL: 'https://upload.wikimedia.org/wikipedia/commons/5/5b/L%27amaro_caso_della_baronessa_di_Carini_%281975%29_-_Janet_%C3%85gren_and_Ugo_Pagliai.jpg' }
+[0mPOST /event [32m200 [0m5.290 ms - 2[0m
+GET all events
+[0mGET /event [32m200 [0m9.785 ms - 1418[0m
+[0mGET / [36m304 [0m0.658 ms - -[0m
+[0mGET /javascripts/events.js [36m304 [0m0.430 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.199 ms - -[0m
+[0mGET /images/add-picture.jpg [36m304 [0m0.369 ms - -[0m
+[0mGET /%7B%7Bevent.ImageURL%7D%7D [33m404 [0m5.129 ms - 1937[0m
+GET all events
+[0mGET /event [32m200 [0m4.739 ms - 1418[0m
+In the DELETE event route
+In the DELETE event route
+In the DELETE event route
+In the DELETE event route
+GET all events
+[0mGET /event [32m200 [0m1.830 ms - 2[0m
+GET all events
+[0mGET /event [36m304 [0m1.735 ms - -[0m
+GET all events
+[0mGET /event [32m200 [0m1.870 ms - 2[0m
+GET all events
+[0mGET /event [36m304 [0m1.699 ms - -[0m
+GET all events
+[0mGET /event [36m304 [0m2.362 ms - -[0m
+GET all events
+[0mGET /event [36m304 [0m1.681 ms - -[0m
+[0mGET / [32m200 [0m0.777 ms - 4898[0m
+[0mGET /javascripts/events.js [32m200 [0m0.605 ms - 7190[0m
+[0mGET /stylesheets/style.css [32m200 [0m0.338 ms - 3565[0m
+[0mGET /images/add-picture.jpg [32m200 [0m2.596 ms - 52873[0m
+[0mGET /%7B%7Bevent.ImageURL%7D%7D [33m404 [0m4.876 ms - 1937[0m
+[0mGET /favicon.ico [33m404 [0m5.681 ms - 1937[0m
+GET all events
+[0mGET /event [36m304 [0m2.082 ms - -[0m
+[0mGET / [32m200 [0m0.811 ms - 4905[0m
+[0mGET /javascripts/events.js [36m304 [0m0.402 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.193 ms - -[0m
+[0mGET /images/add-picture.jpg [36m304 [0m0.379 ms - -[0m
+[0mGET /%7B%7Bevent.ImageURL%7D%7D [33m404 [0m5.153 ms - 1937[0m
+GET all events
+[0mGET /event [32m200 [0m1.705 ms - 2[0m
+GET all events
+[0mGET /event [36m304 [0m2.869 ms - -[0m
+[0mGET / [36m304 [0m0.558 ms - -[0m
+[0mGET /javascripts/events.js [36m304 [0m0.398 ms - -[0m
+[0mGET /stylesheets/style.css [36m304 [0m0.375 ms - -[0m
+[0mGET /images/add-picture.jpg [36m304 [0m0.384 ms - -[0m
+[0mGET /%7B%7Bevent.ImageURL%7D%7D [33m404 [0m5.100 ms - 1937[0m
+GET all events
+[0mGET /event [36m304 [0m2.121 ms - -[0m
+GET all events
+[0mGET /event [36m304 [0m2.449 ms - -[0m
+GET all events
+[0mGET /event [36m304 [0m1.699 ms - -[0m
+[0mDELETE /delete [0m- [0m- ms - -[0m
+In the DELETE event route
+[0mDELETE /delete [0m- [0m- ms - -[0m
+In the DELETE event route
+[0mDELETE /delete [0m- [0m- ms - -[0m
+In the DELETE event route
+[0mDELETE /delete [0m- [0m- ms - -[0m
+POST new event route
+{ Title: 'Death',
+  Description: 'I will die',
+  Address: '1111',
+  MyDate: '2994-12-14',
+  StartTime: '01:00',
+  EndTime: '02:00',
+  ImageURL: 'https://www.abc.net.au/news/image/8205890-4x3-940x705.jpg' }
+[0mPOST /event [32m200 [0m19.125 ms - 2[0m
+GET all events
+[0mGET /event [32m200 [0m3.429 ms - 235[0m
