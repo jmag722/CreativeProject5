@@ -1,35 +1,4 @@
 <!DOCTYPE html>
-<!--<html>-->
-
-<!--<head>-->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>-->
-<!--    <script src="javascripts/events.js"></script>-->
-<!--    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">-->
-<!--    <meta charset="utf-8">-->
-<!--</head>-->
-
-<!--<body>-->
-<!--    <div ng-app='app' ng-controller='mainCtrl'>-->
-
-
-<!--        <form id='inputform' name='eventForm' ng-submit='addNew()'>-->
-<!--            <input type='text' placeholder='Title' ng-model='title'>-->
-<!--            <input type='text' placeholder='Address' ng-model='address'>-->
-<!--            <input type='text' placeholder='Date' ng-model='date'>-->
-<!--            <input type='text' placeholder='Description' ng-model='descrip'>-->
-<!--            <button type='submit'>Add Event</button>-->
-<!--        </form>-->
-
-<!--        <ul class='User-list'>-->
-<!--            <li ng-repeat='event in events'>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-
-<!--</body>-->
-
-<!--</html>-->
-<!------------------------------------------------>
 
 <html>
 
@@ -66,47 +35,79 @@
 </head>
 
 <body ng-app="app" ng-controller="mainCtrl" class="ng-scope">
-    <!--<div ng-app='app' ng-controller='mainCtrl'>-->
-
-
-    <!--    <form id='inputform' name='eventForm' ng-submit='addNew()'>-->
-    <!--        <input type='text' placeholder='Title' ng-model='title'>-->
-    <!--        <input type='text' placeholder='Address' ng-model='address'>-->
-    <!--        <input type='text' placeholder='Date' ng-model='date'>-->
-    <!--        <input type='text' placeholder='Description' ng-model='descrip'>-->
-    <!--        <button type='submit'>Add Event</button>-->
-    <!--    </form>-->
-
-    <!--    <ul class='User-list'>-->
-    <!--        <li ng-repeat='event in events'>-->
-    <!--        </li>-->
-    <!--    </ul>-->
-    <!--</div>-->
 
     <div id="banner">What's Shakin'</div>
-    <div id="menu">
-        <button id="showAddNew" ng-click="showAddNew(true)">Create Event</button>
-    </div>
+    
     <div id="searchBox">
-        <p>Lorem ipsum</p>
-    </div>
-    <div id="results">
-        <!-- ngRepeat: event in events | orderBy:'title' -->
-    </div>
-
-    <div id="overlay" style="display: none;">
-        <div id="addNew">
-            <form id="inputform" name="eventForm" ng-submit="addNew()" class="ng-valid ng-dirty ng-valid-parse ng-submitted" _lpchecked="1">
-                <input type="text" placeholder="Title" ng-model="title" class="ng-valid ng-touched ng-dirty ng-valid-parse">
-                <input type="text" placeholder="Address" ng-model="address" class="ng-valid ng-dirty ng-valid-parse ng-touched">
-                <input type="text" placeholder="Date" ng-model="date" class="ng-valid ng-dirty ng-valid-parse ng-touched">
-                <input type="text" placeholder="Description" ng-model="descrip" class="ng-valid ng-dirty ng-valid-parse ng-touched">
-                <button type="submit">Add Event</button>
+        <div id="titleSearchBox">
+            <form ng-submit="searchByTitle()" class="searchField">
+                <input type="text" placeholder="Title" ng-model="searchTitle">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div id="dateSearchBox">
+            <form ng-submit="searchByDate()" class="searchField">
+                <input type="date" id="dateSearchInput" ng-model="searchDate">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div id="addressSearchBox">
+            <form ng-submit="searchByAddress()" class="searchField">
+                <input type="text" placeholder="Address" ng-model="searchAddress">
+                <button type="submit">Search</button>
             </form>
         </div>
     </div>
+    
+    <div id="menu">
+        <button id="showAddNew" ng-click="showAddNew(true)">Create Event</button>
+        <button id="search" ng-click="toggleSearch()">Show Search</button>
+        <p id="searchCriteria">Current Search: {{currentSearchString}}</p>
+    </div>
+    
+    <div id="results">
+        <event ng-repeat="event in events | orderBy:'title'" event='event'></event>
+    </div>
+
+    <!--<div id="overlay" style="display: none;">-->
+    <!--    <div id="addNew">-->
+    <!--        <form id="inputform" name="eventForm" ng-submit="addNew()" class="ng-valid ng-dirty ng-valid-parse ng-submitted" _lpchecked="1">-->
+    <!--            <input type="text" placeholder="Title" ng-model="title" class="ng-valid ng-touched ng-dirty ng-valid-parse">-->
+    <!--            <input type="text" placeholder="Address" ng-model="address" class="ng-valid ng-dirty ng-valid-parse ng-touched">-->
+    <!--            <input type="text" placeholder="Date" ng-model="date" class="ng-valid ng-dirty ng-valid-parse ng-touched">-->
+    <!--            <input type="text" placeholder="Description" ng-model="descrip" class="ng-valid ng-dirty ng-valid-parse ng-touched">-->
+    <!--            <button type="submit">Add Event</button>-->
+    <!--        </form>-->
+    <!--    </div>-->
+    <!--</div>-->
 
 
+    <div id="overlay">
+        <div id="addNew">
+            <div id="addNewEventTitle">
+                <h2>Create New Event</h2>
+                <button id="closeAddNew" ng-click="showAddNew(false)">&times;</button>
+            </div>
+            <form id="newEventForm" ng-submit="addNew()">
+                <div id="inputFields">
+                    <img id="imagePreview" src="images/add-picture.jpg" />
+                    <input type="file" id="imgFile" accept="image/*" onchange="loadImage(event)" ng-model="imgPath">
+                    <div id="spacetimeCoords">
+                        <input type="text" placeholder="Title" ng-model="title">
+                        <input type="text" placeholder="Description" ng-model="descrip">
+                        <input type="text" placeholder="Address" ng-model="address">
+                        <label for="newEventDate">Date</label>
+                        <input type="date" placeholder="Date" ng-model="date" id="newEventDate">
+                        <label for="newEventStartTime">Start Time</label>
+                        <input type="time" placeholder="Start Time" ng-model="startTime" id="newEventStartTime">
+                        <label for="newEventEndTime">End Time</label>
+                        <input type="time" placeholder="End Time" ng-model="endTime" id="newEventEndTime">
+                    </div>
+                </div>
+                <button id="submitEventBtn" type="submit">Add Event</button>
+            </form>
+        </div>
+    </div>
 
 
 </body>
