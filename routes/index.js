@@ -9,12 +9,12 @@ mongoose.connect('mongodb://localhost/eventDB', { useNewUrlParser: true }); //Co
 
 var eventSchema = mongoose.Schema({ //Defines the Schema for this database
     Title: String,
-    Address: String,
-    DATE: String,
-    Start: String,
-    End: String,
     Description: String,
-    Image: String
+    Address: String,
+    MyDate: String,
+    StartTime: String,
+    EndTime: String,
+    ImageURL: String
 });
 
 //MONGOOSE TAKES collection name and PLURALIZES IT!!!-----
@@ -76,6 +76,8 @@ router.get('/eventTitle', function(req, res, next) {
         if (err) {
             console.log("get error");
         }
+        console.log ("Found event(s): ");
+        console.log (list);
         res.json(list);
     });
 });
@@ -102,7 +104,8 @@ router.get('/eventDate', function(req, res, next) {
     console.log("GET event by Date");
     console.log(req.query);
     var date = req.query["q"];
-    var obj = { DATE: date };
+    // var obj = { DATE: date };
+    var obj = { MyDate: date };
     if (date === "" || date === undefined) {
         obj = {};
     }
@@ -116,17 +119,10 @@ router.get('/eventDate', function(req, res, next) {
 
 router.delete('/delete', function(req, res, next) {
     console.log("In the DELETE event route");
-    // var title = req.query["q"];
-    // var obj = { Title: title };
-    // if (title === "" || title === undefined) {
-    //     console.log("No event to delete?");
-    //     return;
-    // }
-    // Event.findOneAndDelete(obj, function(err) {
-    //     if (err) { console.log("badDelete") };
-    // });
     Event.deleteMany({}, function(err) {
-       
+        if (err) {
+            console.log("delete error");
+        }
     });
 });
 

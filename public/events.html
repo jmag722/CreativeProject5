@@ -40,30 +40,30 @@
 
     <div id="searchBox">
         <div id="titleSearchBox">
-            <form ng-submit="searchByTitle()" class="searchField">
-                <input type="text" placeholder="Title" ng-model="searchTitle">
-                <button type="submit">Search</button>
+            <form ng-submit="searchByTitle()" class="searchBox">
+                <input class="roundedBorder searchField pad3" type="text" placeholder="Title" ng-model="searchTitle">
+                <button class="menuButton" type="submit">Search</button>
             </form>
         </div>
         <div id="dateSearchBox">
-            <form ng-submit="searchByDate()" class="searchField">
-                <input type="date" id="dateSearchInput" ng-model="searchDate">
-                <button type="submit">Search</button>
+            <form ng-submit="searchByDate()" class="searchBox">
+                <input class="roundedBorder searchField pad3" type="date" id="dateSearchInput" ng-model="searchDate">
+                <button class="menuButton" type="submit">Search</button>
             </form>
         </div>
         <div id="addressSearchBox">
-            <form ng-submit="searchByAddress()" class="searchField">
-                <input type="text" placeholder="Address" ng-model="searchAddress">
-                <button type="submit">Search</button>
+            <form ng-submit="searchByAddress()" class="searchBox">
+                <input class="roundedBorder searchField pad3" type="text" placeholder="Address" ng-model="searchAddress">
+                <button class="menuButton" type="submit">Search</button>
             </form>
         </div>
     </div>
 
     <div id="menu">
-        <button id="showAddNew" ng-click="showAddNew(true)">Create Event</button>
-        <button id="search" ng-click="toggleSearch()">Show Search</button>
-        <button id="showAll" ng-click="getAllEvents()">All Parties</button>
-        <button id="deleteAll" ng-click="deleteEvents()">Clear All</button>
+        <button class="menuButton" id="showAddNew" ng-click="showAddNew(true)">Create Event</button>
+        <button class="menuButton" id="search" ng-click="toggleSearch()">Show Search</button>
+        <button class="menuButton" id="showAll" ng-click="getAllEvents()">All Events</button>
+        <button class="menuButton" id="deleteAll" ng-click="deleteEvents()">Clear All</button>
         <p id="searchCriteria">Current Search: {{currentSearchString}}</p>
     </div>
 
@@ -73,29 +73,33 @@
 
 
     <div id="overlay">
-        <div id="addNew">
+        <div id="addNew" class="roundedBorder">
             <div id="addNewEventTitle">
-                <h2>Create New Event</h2>
+                <h2 id="newEventBanner">Create New Event</h2>
                 <button id="closeAddNew" ng-click="showAddNew(false)">&times;</button>
             </div>
             <form id="newEventForm" ng-submit="addNew()">
                 <div id="inputFields">
-                    <img id="imagePreview" src="images/add-picture.jpg" />
-                    <input type="file" id="imgFile" accept="image/*" onchange="loadImage(event)" ng-model="imgPath">
+                    <div id="imageChooser">
+                        <img id="imagePreview" src="images/add-picture.jpg" class="roundedBorder"/>
+                        <!--<input type="file" id="imgFile" accept="image/*" onchange="loadImage(event)" ng-model="imgPath">-->
+                        <input type="url" id="imgPath" placeholder="Image URL" ng-model="imgPath" onchange="loadImage(event)" required class="roundedBorder pad3">
+                    </div>
                     <div id="spacetimeCoords">
-                        <input type="text" placeholder="Title" ng-model="title">
-                        <input type="text" placeholder="Description" ng-model="descrip">
-                        <input type="text" placeholder="Address" ng-model="address">
-                        <label for="newEventDate">Date</label>
-                        <input type="date" placeholder="Date" ng-model="date" id="newEventDate">
+                        <input type="text" placeholder="Title" ng-model="title" required class="roundedBorder pad3">
+                        <input type="text" placeholder="Description" id="newEventDesc" ng-model="descrip" required class="roundedBorder pad3">
+                        <input type="text" placeholder="Address" ng-model="address" required class="roundedBorder pad3">
+                        <label for="newEventDate" class="eventLabel">Date</label>
+                        <input type="date" placeholder="Date" ng-model="date" id="newEventDate" required class="roundedBorder pad3">
 
-                        <label for="newEventStartTime">Start Time</label>
-                        <input type="text" placeholder="Start Time" ng-model="startTime" id="newEventStartTime">
-                        <label for="newEventEndTime">End Time</label>
-                        <input type="text" placeholder="End Time" ng-model="endTime" id="newEventEndTime">
+                        <label for="newEventStartTime" class="eventLabel">Start Time</label>
+                        <input type="time" placeholder="Start Time" ng-model="startTime" id="newEventStartTime" required class="roundedBorder pad3">
+                        <label for="newEventEndTime" class="eventLabel">End Time</label>
+                        <input type="time" placeholder="End Time" ng-model="endTime" id="newEventEndTime" required class="roundedBorder pad3">
+                        <!--<textarea placeholder="Description" rows="5" id="newEventDesc" ng-model="descrip" required/>-->
                     </div>
                 </div>
-                <button id="submitEventBtn" type="submit">Add Event</button>
+                <button id="submitEventBtn" type="submit" class="roundedBorder">Add Event</button>
             </form>
         </div>
     </div>

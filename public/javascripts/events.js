@@ -8,27 +8,22 @@ function mainCtrl($scope, $http) {
 
     $scope.showSearch = false;
     $scope.events = [];
-    $scope.currentSearchString = "City:Provo";
+    $scope.currentSearchString = "None";
 
     $scope.addNew = function() {
-        var year = $scope.date.getFullYear();
-        var month = $scope.date.getMonth() + 1;
-        var day = $scope.date.getDate();
-        var dateString = month + "-" + day + "-" + year;
+
         var myobj = {
             Title: $scope.title,
-            Address: $scope.address,
-            DATE: dateString,
-            Start: $scope.startTime,
-            End: $scope.endTime,
             Description: $scope.descrip,
-            Image: $scope.imgPath
+            Address: $scope.address,
+            MyDate: $("#newEventDate").val(),
+            StartTime: $("#newEventStartTime").val(),
+            EndTime: $("#newEventEndTime").val(),
+            ImageURL: $("#imgPath").val()
         };
         var jobj = JSON.stringify(myobj);
 
-        // var url = "event";
         //makes call to URL route from front end and gets response from backend
-
         $http({
             method: "POST",
             url: "event",
@@ -40,6 +35,15 @@ function mainCtrl($scope, $http) {
         });
 
         $scope.showAddNew(false);
+
+        // Clear entry form
+        $scope.title = '';
+        $scope.descrip = '';
+        $scope.address = '';
+        $("#newEventDate").val('');
+        $("#newEventStartTime").val('');
+        $("#newEventEndTime").val('');
+        $("#imgPath").val('');
     };
 
     $scope.showAddNew = function(show) {
@@ -58,16 +62,17 @@ function mainCtrl($scope, $http) {
     $scope.searchByTitle = function() {
         $scope.toggleSearch();
         $scope.currentSearchString = "Title:" + $scope.searchTitle;
-        console.log($scope.currentSearchString)
+        console.log($scope.currentSearchString);
         $http({
             method: "GET",
             url: "eventTitle?q=" + $scope.searchTitle
         }).then(function mySuccess(response) {
-            console.log("successTitleSearch")
+            console.log("successTitleSearch");
+            // console.log (response.data);
             $scope.events = response.data;
             console.log($scope.events);
         }, function myError(response) {
-            console.log("bad title")
+            console.log("bad title");
         });
 
         $scope.searchTitle = "";
@@ -79,13 +84,14 @@ function mainCtrl($scope, $http) {
         var year = $scope.searchDate.getFullYear();
         var month = $scope.searchDate.getMonth() + 1;
         var day = $scope.searchDate.getDate();
-        
+
         var dateString = month + "-" + day + "-" + year;
         $scope.currentSearchString = "Date:" + dateString;
 
         $http({
             method: "GET",
-            url: "eventDate?q=" + dateString
+            // url: "eventDate?q=" + dateString
+            url: "eventDate?q=" + $("#dateSearchInput").val()
         }).then(function mySuccess(response) {
             console.log("successSearchDate")
             $scope.events = response.data;
@@ -116,8 +122,11 @@ function mainCtrl($scope, $http) {
 
         $scope.searchAddress = "";
     };
-    
+
     $scope.getAllEvents = function() {
+        
+        $scope.currentSearchString = "All:Events";
+        
         $http({
             method: "GET",
             url: "event"
@@ -129,8 +138,8 @@ function mainCtrl($scope, $http) {
             console.log("bad get all")
         });
     }
-    
-     $scope.deleteEvents = function() {
+
+    $scope.deleteEvents = function() {
         $http({
             method: "DELETE",
             url: "delete"
@@ -170,15 +179,22 @@ app.directive('eventField', function() {
         restrict: 'E',
         replace: 'true',
         template: (
-
             '<div class="event">' +
-            '<img class="image" ng-src="{{event.imgUrl}}" />' +
-            '<div class="title">{{event.title}}</div>' +
-            '<div class="dateTime">' +
-            '<div class="date">{{event.date}}</div>' +
-            '<div class="time">{{event.time}}</div>' +
-            '</div>' +
-            '</div>'
+            '<h2 class="eventTitle">{{event.Title}}</h2>' +
+            '<div class="eventImgAndSpacetimeCoords">' +
+            '<img class="eventImage roundedBorder" src="{{event.ImageURL}}">' +
+            '<div class="eventSpacetimeCoords">' +
+            '<label class="eventLabel">Date:</label>' +
+            '<input type="date" class="roundedBorder" value="{{event.MyDate}}" readonly>' +
+            '<label class="eventLabel">Start:</label>' +
+            '<input type="time" class="roundedBorder" value="{{event.StartTime}}" readonly>' +
+            '<label class="eventLabel">End:</label>' +
+            '<input type="time" class="roundedBorder" value="{{event.EndTime}}" readonly>' +
+            '<label class="eventLabel">Location:</label>' +
+            '<div class="eventDescription roundedBorder pad3">{{event.Address}}</div>' +
+            '<label class="eventLabel">Description:</label>' +
+            '<textarea class="eventDescription roundedBorder" rows="5" readonly>{{event.Description}}</textarea>' +
+            '</div></div></div>'
         )
     };
 });
@@ -209,5 +225,6 @@ $(document).ready(function() {
 
 // Sets the image preview when #imgFile changes.
 function loadImage(event) {
-    $("#imagePreview").attr("src", URL.createObjectURL(event.target.files[0]));
+    console.log("loadImage called");
+    $("#imagePreview").attr("src", $("#imgPath").val());
 }
