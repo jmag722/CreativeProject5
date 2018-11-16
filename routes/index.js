@@ -13,7 +13,8 @@ var eventSchema = mongoose.Schema({ //Defines the Schema for this database
     DATE: String,
     Start: String,
     End: String,
-    Description: String
+    Description: String,
+    Image: String
 });
 
 //MONGOOSE TAKES collection name and PLURALIZES IT!!!-----
@@ -48,17 +49,17 @@ router.post('/event', function(req, res, next) {
 });
 
 
-// //GET EVENT BY TITLE
-// router.get('/event', function(req, res, next) {
-//     console.log("GET all events");
+//GET  ALL events
+router.get('/event', function(req, res, next) {
+    console.log("GET all events");
 
-//     Event.find(function(err, list) {
-//         if (err) {
-//             console.log("get error");
-//         }
-//         res.json(list);
-//     });
-// });
+    Event.find(function(err, list) {
+        if (err) {
+            console.log("get error");
+        }
+        res.json(list);
+    });
+});
 
 
 //GET EVENT BY TITLE
@@ -115,13 +116,16 @@ router.get('/eventDate', function(req, res, next) {
 
 router.delete('/delete', function(req, res, next) {
     console.log("In the DELETE event route");
-    var title = req.query["q"];
-    var obj = { Title: title };
-    if (title === "" || title===undefined) {
-        console.log("No event to delete?");
-        return;
-    }
-    Event.findOneAndDelete(obj, function(err) {
+    // var title = req.query["q"];
+    // var obj = { Title: title };
+    // if (title === "" || title === undefined) {
+    //     console.log("No event to delete?");
+    //     return;
+    // }
+    // Event.findOneAndDelete(obj, function(err) {
+    //     if (err) { console.log("badDelete") };
+    // });
+    Event.deleteMany(function(err) {
         if (err) { console.log("badDelete") };
     });
 });

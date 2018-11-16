@@ -37,7 +37,7 @@
 <body ng-app="app" ng-controller="mainCtrl" class="ng-scope">
 
     <div id="banner">What's Shakin'</div>
-    
+
     <div id="searchBox">
         <div id="titleSearchBox">
             <form ng-submit="searchByTitle()" class="searchField">
@@ -47,7 +47,7 @@
         </div>
         <div id="dateSearchBox">
             <form ng-submit="searchByDate()" class="searchField">
-                <input type="text" placeholder="mm/dd/yyyy" id="dateSearchInput" ng-model="searchDate">
+                <input type="date" id="dateSearchInput" ng-model="searchDate">
                 <button type="submit">Search</button>
             </form>
         </div>
@@ -58,16 +58,17 @@
             </form>
         </div>
     </div>
-    
+
     <div id="menu">
         <button id="showAddNew" ng-click="showAddNew(true)">Create Event</button>
         <button id="search" ng-click="toggleSearch()">Show Search</button>
+        <button id="showAll" ng-click="getAllEvents()">All Parties</button>
+        <button id="deleteAll" ng-click="deleteEvents()">Clear All</button>
         <p id="searchCriteria">Current Search: {{currentSearchString}}</p>
     </div>
-    
+
     <div id="results">
-        <!--ng-repeat="event in events | orderBy:'title'" event='event'-->
-        <event-field ></event-field>
+        <event-field ng-repeat="event in events | orderBy:'title'" event='event'></event-field>
     </div>
 
 
@@ -86,8 +87,8 @@
                         <input type="text" placeholder="Description" ng-model="descrip">
                         <input type="text" placeholder="Address" ng-model="address">
                         <label for="newEventDate">Date</label>
-                        <input type="text" placeholder="mm/dd/yyyy" ng-model="date" id="newEventDate">
-                        
+                        <input type="date" placeholder="Date" ng-model="date" id="newEventDate">
+
                         <label for="newEventStartTime">Start Time</label>
                         <input type="text" placeholder="Start Time" ng-model="startTime" id="newEventStartTime">
                         <label for="newEventEndTime">End Time</label>

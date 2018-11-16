@@ -11,13 +11,18 @@ function mainCtrl($scope, $http) {
     $scope.currentSearchString = "City:Provo";
 
     $scope.addNew = function() {
+        var year = $scope.date.getFullYear();
+        var month = $scope.date.getMonth() + 1;
+        var day = $scope.date.getDate();
+        var dateString = month + "-" + day + "-" + year;
         var myobj = {
             Title: $scope.title,
             Address: $scope.address,
-            DATE: $scope.date,
+            DATE: dateString,
             Start: $scope.startTime,
             End: $scope.endTime,
-            Description: $scope.descrip
+            Description: $scope.descrip,
+            Image: $scope.imgPath
         };
         var jobj = JSON.stringify(myobj);
 
@@ -71,12 +76,16 @@ function mainCtrl($scope, $http) {
     $scope.searchByDate = function() {
         $scope.toggleSearch();
         // $scope.currentSearchString = "Date:" + $scope.searchDate;
-        $scope.currentSearchString = "Date:" + $("#dateSearchInput").val();
-
+        var year = $scope.searchDate.getFullYear();
+        var month = $scope.searchDate.getMonth() + 1;
+        var day = $scope.searchDate.getDate();
+        
+        var dateString = month + "-" + day + "-" + year;
+        $scope.currentSearchString = "Date:" + dateString;
 
         $http({
             method: "GET",
-            url: "eventDate?q=" + $scope.searchDate
+            url: "eventDate?q=" + dateString
         }).then(function mySuccess(response) {
             console.log("successSearchDate")
             $scope.events = response.data;
@@ -94,7 +103,7 @@ function mainCtrl($scope, $http) {
         $scope.currentSearchString = "Address:" + $scope.searchAddress;
 
 
-         $http({
+        $http({
             method: "GET",
             url: "eventAddress?q=" + $scope.searchAddress
         }).then(function mySuccess(response) {
@@ -107,6 +116,33 @@ function mainCtrl($scope, $http) {
 
         $scope.searchAddress = "";
     };
+    
+    $scope.getAllEvents = function() {
+        $http({
+            method: "GET",
+            url: "event"
+        }).then(function mySuccess(response) {
+            console.log("got All")
+            $scope.events = response.data;
+            console.log($scope.events);
+        }, function myError(response) {
+            console.log("bad get all")
+        });
+    }
+    
+     $scope.deleteEvents = function() {
+        $http({
+            method: "DELETE",
+            url: "delete"
+        }).then(function mySuccess(response) {
+            console.log("successful Delete")
+            $scope.events = response.data;
+            console.log($scope.events)
+            console.log($scope.events);
+        }, function myError(response) {
+            console.log("bad delete")
+        });
+    }
 
     $scope.toggleSearch = function() {
         console.log("Toggling search");
