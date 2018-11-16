@@ -47,7 +47,7 @@
         </div>
         <div id="dateSearchBox">
             <form ng-submit="searchByDate()" class="searchField">
-                <input type="date" id="dateSearchInput" ng-model="searchDate">
+                <input type="text" placeholder="mm/dd/yyyy" id="dateSearchInput" ng-model="searchDate">
                 <button type="submit">Search</button>
             </form>
         </div>
@@ -66,20 +66,9 @@
     </div>
     
     <div id="results">
-        <event ng-repeat="event in events | orderBy:'title'" event='event'></event>
+        <!--ng-repeat="event in events | orderBy:'title'" event='event'-->
+        <event-field ></event-field>
     </div>
-
-    <!--<div id="overlay" style="display: none;">-->
-    <!--    <div id="addNew">-->
-    <!--        <form id="inputform" name="eventForm" ng-submit="addNew()" class="ng-valid ng-dirty ng-valid-parse ng-submitted" _lpchecked="1">-->
-    <!--            <input type="text" placeholder="Title" ng-model="title" class="ng-valid ng-touched ng-dirty ng-valid-parse">-->
-    <!--            <input type="text" placeholder="Address" ng-model="address" class="ng-valid ng-dirty ng-valid-parse ng-touched">-->
-    <!--            <input type="text" placeholder="Date" ng-model="date" class="ng-valid ng-dirty ng-valid-parse ng-touched">-->
-    <!--            <input type="text" placeholder="Description" ng-model="descrip" class="ng-valid ng-dirty ng-valid-parse ng-touched">-->
-    <!--            <button type="submit">Add Event</button>-->
-    <!--        </form>-->
-    <!--    </div>-->
-    <!--</div>-->
 
 
     <div id="overlay">
@@ -97,11 +86,12 @@
                         <input type="text" placeholder="Description" ng-model="descrip">
                         <input type="text" placeholder="Address" ng-model="address">
                         <label for="newEventDate">Date</label>
-                        <input type="date" placeholder="Date" ng-model="date" id="newEventDate">
+                        <input type="text" placeholder="mm/dd/yyyy" ng-model="date" id="newEventDate">
+                        
                         <label for="newEventStartTime">Start Time</label>
-                        <input type="time" placeholder="Start Time" ng-model="startTime" id="newEventStartTime">
+                        <input type="text" placeholder="Start Time" ng-model="startTime" id="newEventStartTime">
                         <label for="newEventEndTime">End Time</label>
-                        <input type="time" placeholder="End Time" ng-model="endTime" id="newEventEndTime">
+                        <input type="text" placeholder="End Time" ng-model="endTime" id="newEventEndTime">
                     </div>
                 </div>
                 <button id="submitEventBtn" type="submit">Add Event</button>

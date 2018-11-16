@@ -10,7 +10,9 @@ mongoose.connect('mongodb://localhost/eventDB', { useNewUrlParser: true }); //Co
 var eventSchema = mongoose.Schema({ //Defines the Schema for this database
     Title: String,
     Address: String,
-    Time: String,
+    DATE: String,
+    Start: String,
+    End: String,
     Description: String
 });
 
@@ -99,7 +101,7 @@ router.get('/eventDate', function(req, res, next) {
     console.log("GET event by Date");
     console.log(req.query);
     var date = req.query["q"];
-    var obj = { Time: date };
+    var obj = { DATE: date };
     if (date === "" || date === undefined) {
         obj = {};
     }

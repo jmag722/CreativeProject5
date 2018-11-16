@@ -1,6 +1,6 @@
 /* global angular */
 /* global $ */
-angular.module('app', [])
+var app = angular.module('app', [])
     .controller('mainCtrl', mainCtrl);
 
 //model is scope variable that has all data
@@ -11,7 +11,14 @@ function mainCtrl($scope, $http) {
     $scope.currentSearchString = "City:Provo";
 
     $scope.addNew = function() {
-        var myobj = { Title: $scope.title, Address: $scope.address, Time: $scope.date, Description: $scope.descrip };
+        var myobj = {
+            Title: $scope.title,
+            Address: $scope.address,
+            DATE: $scope.date,
+            Start: $scope.startTime,
+            End: $scope.endTime,
+            Description: $scope.descrip
+        };
         var jobj = JSON.stringify(myobj);
 
         // var url = "event";
@@ -42,57 +49,84 @@ function mainCtrl($scope, $http) {
             $("#overlay").css('display', 'none');
         }
     };
-    
+
     $scope.searchByTitle = function() {
         $scope.toggleSearch();
         $scope.currentSearchString = "Title:" + $scope.searchTitle;
-        
-        // Search functionality goes here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
+        console.log($scope.currentSearchString)
+        $http({
+            method: "GET",
+            url: "eventTitle?q=" + $scope.searchTitle
+        }).then(function mySuccess(response) {
+            console.log("successTitleSearch")
+            $scope.events = response.data;
+            console.log($scope.events);
+        }, function myError(response) {
+            console.log("bad title")
+        });
+
         $scope.searchTitle = "";
     };
-    
+
     $scope.searchByDate = function() {
         $scope.toggleSearch();
         // $scope.currentSearchString = "Date:" + $scope.searchDate;
         $scope.currentSearchString = "Date:" + $("#dateSearchInput").val();
-        
-        
-        // Search functionality goes here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
+
+
+        $http({
+            method: "GET",
+            url: "eventDate?q=" + $scope.searchDate
+        }).then(function mySuccess(response) {
+            console.log("successSearchDate")
+            $scope.events = response.data;
+            console.log($scope.events);
+        }, function myError(response) {
+            console.log("bad dates")
+        });
+
+
         $scope.searchDate = "";
     };
-    
+
     $scope.searchByAddress = function() {
         $scope.toggleSearch();
         $scope.currentSearchString = "Address:" + $scope.searchAddress;
-        
-        
-        // Search functionality goes here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
+
+
+         $http({
+            method: "GET",
+            url: "eventAddress?q=" + $scope.searchAddress
+        }).then(function mySuccess(response) {
+            console.log("successAddressSearch")
+            $scope.events = response.data;
+            console.log($scope.events);
+        }, function myError(response) {
+            console.log("bad address")
+        });
+
         $scope.searchAddress = "";
     };
 
     $scope.toggleSearch = function() {
-        console.log ("Toggling search");
+        console.log("Toggling search");
         $scope.showSearch = !$scope.showSearch;
-        
-        if ($scope.showSearch){
+
+        if ($scope.showSearch) {
             // console.log ("Showing search");
-            $("#searchBox").css ('maxHeight', $("#searchBox").prop("scrollHeight") + "px");
-            $("#search").html ("Hide Search");
+            $("#searchBox").css('maxHeight', $("#searchBox").prop("scrollHeight") + "px");
+            $("#search").html("Hide Search");
         }
         else {
             // console.log ("Hiding search");
-            $("#searchBox").css ('maxHeight', '0px');
-            $("#search").html ("Show Search");
+            $("#searchBox").css('maxHeight', '0px');
+            $("#search").html("Show Search");
         }
     };
 }
 
 // Defines the look and layout of a search result.
-function eventDirective() {
-
+app.directive('eventField', function() {
     return {
         scope: {
             event: '='
@@ -100,11 +134,6 @@ function eventDirective() {
         restrict: 'E',
         replace: 'true',
         template: (
-            // '<div class="avatar">' +
-            // '<img ng-src="{{user.avatarUrl}}" />' +
-            // '<h4>{{user.name}}</h4>' +
-            // '<h6>{{user.email}}</h6>' +
-            // '</div>'
 
             '<div class="event">' +
             '<img class="image" ng-src="{{event.imgUrl}}" />' +
@@ -116,7 +145,8 @@ function eventDirective() {
             '</div>'
         )
     };
-}
+});
+
 
 $(document).ready(function() {
 
