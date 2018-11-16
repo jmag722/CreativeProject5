@@ -125,8 +125,8 @@ router.delete('/delete', function(req, res, next) {
     // Event.findOneAndDelete(obj, function(err) {
     //     if (err) { console.log("badDelete") };
     // });
-    Event.deleteMany(function(err) {
-        if (err) { console.log("badDelete") };
+    Event.deleteMany({}, function(err) {
+       
     });
 });
 
